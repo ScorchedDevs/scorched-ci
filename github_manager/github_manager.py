@@ -1,10 +1,12 @@
+from os import getenv
 from github import Github
 
 
 class GithubManager:
     def __init__(self):
 
-        self.github = Github("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")
+        token = getenv("TOKEN")
+        self.github = Github(token)
 
     def get_github_repository(self, repo_name):
 
