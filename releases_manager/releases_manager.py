@@ -9,6 +9,7 @@ class ReleasesManager:
         repo = self.github_manager.get_github_repository(repo_name)
         new_tag = self.calculate_new_tag(repo, major, minor, patch)
         description = self.create_release_description(repo)
+        self.github_manager.merge_develop_into_main(repo)
         self.github_manager.create_new_tag_and_release(repo, new_tag, description)
         self.github_manager.replace_changelog_file(repo)
 
