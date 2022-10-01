@@ -27,9 +27,15 @@ class GithubManager:
 
         return changelog_content
 
+    def merge_develop_into_main(self, repo):
+
+        head = repo.get_branch("develop")
+
+        repo.merge("main", head.commit.sha, "Mergeando develop na main")
+
     def create_new_tag_and_release(self, repo, new_tag, release_description):
 
-        commit_sha = repo.get_branch("develop").commit.sha
+        commit_sha = repo.get_branch("main").commit.sha
         repo.create_git_tag_and_release(
             tag=new_tag,
             tag_message="Tag criada automaticamente pelo Scorched CI",
