@@ -29,7 +29,7 @@ class GithubManager:
 
     def create_new_tag_and_release(self, repo, new_tag, release_description):
 
-        commit_sha = repo.get_branch("main").commit.sha
+        commit_sha = repo.get_branch("develop").commit.sha
         repo.create_git_tag_and_release(
             tag=new_tag,
             tag_message="Tag criada automaticamente pelo Scorched CI",
@@ -46,12 +46,12 @@ class GithubManager:
             changelog_file.path,
             "Deletando changelog populado",
             changelog_file.sha,
-            branch="main",
+            branch="develop",
         )
         with open("changelog_template.md", encoding="utf-8") as changelog_template:
             repo.create_file(
                 "CHANGELOG.md",
                 "Recriando changelog a partir do template",
                 changelog_template.read(),
-                branch="main",
+                branch="develop",
             )
