@@ -1,7 +1,7 @@
 from github_manager import GithubManager
 
-class ReleasesManager:
 
+class ReleasesManager:
     def __init__(self):
         self.github_manager = GithubManager()
 
@@ -11,7 +11,7 @@ class ReleasesManager:
         description = self.create_release_description(repo)
         self.github_manager.create_new_tag_and_release(repo, new_tag, description)
         self.github_manager.replace_changelog_file(repo)
-    
+
     def calculate_new_tag(self, repo, major, minor, patch):
         latest_tag = self.github_manager.get_latest_tag(repo)
 
@@ -44,9 +44,11 @@ class ReleasesManager:
     def create_release_description(self, repo):
 
         description = ""
-        
+
         changelog_content = self.github_manager.get_changelog_content(repo)
-        split_changelog_file = changelog_content.replace("\n", " ").replace("# Changelog", "").split("##")
+        split_changelog_file = (
+            changelog_content.replace("\n", " ").replace("# Changelog", "").split("##")
+        )
         split_changelog_file.pop(0)
 
         for section in split_changelog_file:
@@ -60,10 +62,7 @@ class ReleasesManager:
                 for change in changes:
                     description += f"  -{change.rstrip()}\n"
 
-
         if description == "":
             raise SystemExit("Changelog vazio")
 
-
         return description
-
