@@ -46,10 +46,10 @@ class GithubManager:
             changelog_file.sha,
             branch="main",
         )
-        changelog_template = open("changelog_template.md")
-        repo.create_file(
-            "CHANGELOG.md",
-            "Recriando changelog a partir do template",
-            changelog_template.read(),
-            branch="main",
-        )
+        with open("changelog_template.md", encoding="utf-8") as changelog_template:
+            repo.create_file(
+                "CHANGELOG.md",
+                "Recriando changelog a partir do template",
+                changelog_template.read(),
+                branch="main",
+            )

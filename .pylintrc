@@ -157,7 +157,9 @@ disable=raw-checker-failed,
         django-not-configured,
         missing-module-docstring,
         missing-class-docstring,
-        missing-function-docstring
+        missing-function-docstring,
+        no-self-use
+
 
 
 # Enable the message, report, category or checker with the given id(s). You can
