@@ -1,4 +1,5 @@
 from github_manager import GithubManager
+import logging
 
 
 class ReleasesManager:
@@ -6,6 +7,8 @@ class ReleasesManager:
         self.github_manager = GithubManager()
 
     def create_new_release(self, repo_name=None, major=False, minor=False, patch=False):
+
+        logging.info("Creates a new realease")
         repo = self.github_manager.get_github_repository(repo_name)
         new_tag = self.calculate_new_tag(repo, major, minor, patch)
         description = self.create_release_description(repo)
@@ -15,6 +18,8 @@ class ReleasesManager:
 
     def calculate_new_tag(self, repo, major, minor, patch):
         latest_tag = self.github_manager.get_latest_tag(repo)
+
+        logging.info("this function calculates a new tag")
 
         if not latest_tag:
             latest_tag = "v0-0-0"
@@ -43,6 +48,8 @@ class ReleasesManager:
         return new_tag
 
     def create_release_description(self, repo):
+
+        logging.info("Creates a release description")
 
         description = ""
 

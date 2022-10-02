@@ -1,6 +1,6 @@
 from os import getenv
 from github import Github
-
+import logging
 
 class GithubManager:
     def __init__(self):
@@ -10,17 +10,26 @@ class GithubManager:
 
     def get_github_repository(self, repo_name):
 
+        logging.info("Getting github repository")
+
         repo = self.github.get_repo(repo_name)
 
         return repo
 
+
     def get_latest_tag(self, repo):
+
+        logging.info("Getting latest tag")
 
         tag = list(repo.get_tags())[0].name if list(repo.get_tags()) else None
 
         return tag
 
+        
+
     def get_changelog_content(self, repo):
+
+        logging.info("Getting changelog content")
 
         changelog_file = repo.get_contents("CHANGELOG.md")
         changelog_content = changelog_file.decoded_content.decode()
@@ -29,11 +38,15 @@ class GithubManager:
 
     def merge_develop_into_main(self, repo):
 
+        logging.info("Merging the develop branch into main branch")
+
         head = repo.get_branch("develop")
 
         repo.merge("main", head.commit.sha, "Mergeando develop na main")
 
     def create_new_tag_and_release(self, repo, new_tag, release_description):
+
+        logging.info("Creates a new tag and a release")
 
         commit_sha = repo.get_branch("main").commit.sha
         repo.create_git_tag_and_release(
@@ -46,6 +59,8 @@ class GithubManager:
         )
 
     def replace_changelog_file(self, repo):
+
+        logging.info("Replaces changelog file")
 
         changelog_file = repo.get_contents("CHANGELOG.md")
         repo.delete_file(
