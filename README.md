@@ -18,10 +18,6 @@ Para editar esse projeto é recomendado que se use o sistema operacional linux, 
 
 Esse projeto conta com a configuração devcontainer do VSCode, por isso o melhor jeito de trabalhar nesse projeto é fazer o download do VSCode, instalar a extenção  "remote containers" e, ao abrir o projeto, clicar em "reopen in container". Dessa forma todas as dependencias e extenções utilizadas para trabalahr nesse projeto serão instaladas automáticamente.
 
-## Debugging
-
-Esse projeto também conta com launch.json, mais uma funcionalidade do VSCode, então para rodar a aplicação ao testar, basta apertar F5 que ele entrará no modo debug, deixando esse passo ainda mais fácil.
-
 ## Como contribuir com o projeto?
 
 Para contribuir com o projeto é interessante que se siga as seguintes regras:
