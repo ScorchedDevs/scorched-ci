@@ -1,7 +1,11 @@
 from os import getenv
 from releases_manager import ReleasesManager
+from utils import Utils
 
 release_manager = ReleasesManager()
+utils = Utils()
+utils.start_streaming_the_log()
+
 repo_name = getenv("REPO_NAME")
 
 def release_major():
