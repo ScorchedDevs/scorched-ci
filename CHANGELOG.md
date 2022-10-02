@@ -14,4 +14,4 @@
 
 ## Quebra de compatibilidade
 
- - Criando primeira versão do Scorched CI
+ - N/A
