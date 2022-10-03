@@ -1,5 +1,6 @@
-from github_manager import GithubManager
 import logging
+from github_manager import GithubManager
+
 
 
 class ReleasesManager:
