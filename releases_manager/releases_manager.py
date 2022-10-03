@@ -1,4 +1,6 @@
+import logging
 from github_manager import GithubManager
+
 
 
 class ReleasesManager:
@@ -6,10 +8,14 @@ class ReleasesManager:
         self.github_manager = GithubManager()
 
     def create_new_release(self, repo_name=None, major=False, minor=False, patch=False):
+
         repo = self.github_manager.get_github_repository(repo_name)
+        logging.info("Getting repository")
         new_tag = self.calculate_new_tag(repo, major, minor, patch)
         description = self.create_release_description(repo)
+        logging.info("Merging develop into main")
         self.github_manager.merge_develop_into_main(repo)
+        logging.info("Creating a new release")
         self.github_manager.create_new_tag_and_release(repo, new_tag, description)
         self.github_manager.replace_changelog_file(repo)
 

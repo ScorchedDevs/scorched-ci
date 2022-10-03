@@ -2,7 +2,7 @@
 
 ## Novas funcionalidades
 
- - N/A
+ - #3 Adding logging events
 
 ## Melhorias
 
@@ -14,4 +14,4 @@
 
 ## Quebra de compatibilidade
 
- - Criando primeira versão do Scorched CI
+ - N/A
