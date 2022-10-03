@@ -8,7 +8,6 @@ class ReleasesManager:
 
     def create_new_release(self, repo_name=None, major=False, minor=False, patch=False):
 
-        logging.info("Creates a new realease")
         repo = self.github_manager.get_github_repository(repo_name)
         logging.info("Getting repository")
         new_tag = self.calculate_new_tag(repo, major, minor, patch)
@@ -21,8 +20,6 @@ class ReleasesManager:
 
     def calculate_new_tag(self, repo, major, minor, patch):
         latest_tag = self.github_manager.get_latest_tag(repo)
-
-        
 
         if not latest_tag:
             latest_tag = "v0-0-0"
@@ -51,8 +48,6 @@ class ReleasesManager:
         return new_tag
 
     def create_release_description(self, repo):
-
-        
 
         description = ""
 
