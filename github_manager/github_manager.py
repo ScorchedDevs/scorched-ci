@@ -46,7 +46,7 @@ class GithubManager:
 
     def create_new_tag_and_release(self, repo, new_tag, release_description):
 
-        logging.info("Creates a new tag and a release")
+        logging.info("Creating a new release")
 
         commit_sha = repo.get_branch("main").commit.sha
         repo.create_git_tag_and_release(

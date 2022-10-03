@@ -2,7 +2,7 @@
 
 ## Novas funcionalidades
 
- - #3 adding logging events
+ - #3 Adding logging events
 
 ## Melhorias
 

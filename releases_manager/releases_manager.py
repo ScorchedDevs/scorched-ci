@@ -10,16 +10,19 @@ class ReleasesManager:
 
         logging.info("Creates a new realease")
         repo = self.github_manager.get_github_repository(repo_name)
+        logging.info("Getting repository")
         new_tag = self.calculate_new_tag(repo, major, minor, patch)
         description = self.create_release_description(repo)
+        logging.info("Merging develop into main")
         self.github_manager.merge_develop_into_main(repo)
+        logging.info("Creating a new release")
         self.github_manager.create_new_tag_and_release(repo, new_tag, description)
         self.github_manager.replace_changelog_file(repo)
 
     def calculate_new_tag(self, repo, major, minor, patch):
         latest_tag = self.github_manager.get_latest_tag(repo)
 
-        logging.info("this function calculates a new tag")
+        
 
         if not latest_tag:
             latest_tag = "v0-0-0"
@@ -49,7 +52,7 @@ class ReleasesManager:
 
     def create_release_description(self, repo):
 
-        logging.info("Creates a release description")
+        
 
         description = ""
 
