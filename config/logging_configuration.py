@@ -3,7 +3,6 @@ import logging
 import sys
 
 
-
 def config_logger():
 
     log = logging.getLogger("werkzeug")
@@ -14,5 +13,3 @@ def config_logger():
         format="%(asctime)s - [%(levelname)s]: %(message)s",
         stream=sys.stdout,
     )
-
-config_logger()
