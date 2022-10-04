@@ -3,7 +3,7 @@ from pytest_mock import MockerFixture
 from releases_manager import ReleasesManager
 
 
-class FakeRepo: # pragma: no cover
+class FakeRepo:  # pragma: no cover
     def get_branch(branch_name):
         class branch:
             class commit:
@@ -13,7 +13,7 @@ class FakeRepo: # pragma: no cover
 
     def create_git_tag_and_release(
         tag, tag_message, release_name, release_message, type, object
-    ): 
+    ):
         pass
 
     def get_contents(changelog_file):
@@ -53,28 +53,29 @@ fake_changelog = """
 """
 fake_repo = FakeRepo
 
+get_github_repository_path = "github_manager.GithubManager.get_github_repository"
+get_latest_tag_path = "github_manager.GithubManager.get_latest_tag"
+merge_develop_into_main_path = "github_manager.GithubManager.merge_develop_into_main"
+create_new_tag_and_release_path = (
+    "github_manager.GithubManager.create_new_tag_and_release"
+)
+replace_changelog_file_path = "github_manager.GithubManager.replace_changelog_file"
+get_changelog_content_path = "github_manager.GithubManager.get_changelog_content"
+
 
 def test_release_major(mocker: MockerFixture) -> None:
 
     get_github_repository_mock = mocker.patch(
-        "github_manager.GithubManager.get_github_repository", return_value=fake_repo
+        get_github_repository_path, return_value=fake_repo
     )
-    get_latest_tag_mock = mocker.patch(
-        "github_manager.GithubManager.get_latest_tag", return_value=fake_tag
-    )
+    get_latest_tag_mock = mocker.patch(get_latest_tag_path, return_value=fake_tag)
     get_changelog_content_mock = mocker.patch(
-        "github_manager.GithubManager.get_changelog_content",
+        get_changelog_content_path,
         return_value=fake_changelog,
     )
-    merge_develop_into_main_mock = mocker.patch(
-        "github_manager.GithubManager.merge_develop_into_main"
-    )
-    create_new_tag_and_release_mock = mocker.patch(
-        "github_manager.GithubManager.create_new_tag_and_release"
-    )
-    replace_changelog_file_mock = mocker.patch(
-        "github_manager.GithubManager.replace_changelog_file"
-    )
+    merge_develop_into_main_mock = mocker.patch(merge_develop_into_main_path)
+    create_new_tag_and_release_mock = mocker.patch(create_new_tag_and_release_path)
+    replace_changelog_file_mock = mocker.patch(replace_changelog_file_path)
 
     releases_manager = ReleasesManager()
     releases_manager.create_new_release(repo_name=fake_repo_name, major=True)
@@ -101,24 +102,17 @@ def test_release_major(mocker: MockerFixture) -> None:
 def test_release_minor(mocker: MockerFixture) -> None:
 
     get_github_repository_mock = mocker.patch(
-        "github_manager.GithubManager.get_github_repository", return_value=fake_repo
+        get_github_repository_path, return_value=fake_repo
     )
-    get_latest_tag_mock = mocker.patch(
-        "github_manager.GithubManager.get_latest_tag", return_value=fake_tag
-    )
+    get_latest_tag_mock = mocker.patch(get_latest_tag_path, return_value=fake_tag)
     get_changelog_content_mock = mocker.patch(
-        "github_manager.GithubManager.get_changelog_content",
+        get_changelog_content_path,
         return_value=fake_changelog,
     )
-    merge_develop_into_main_mock = mocker.patch(
-        "github_manager.GithubManager.merge_develop_into_main"
-    )
-    create_new_tag_and_release_mock = mocker.patch(
-        "github_manager.GithubManager.create_new_tag_and_release"
-    )
-    replace_changelog_file_mock = mocker.patch(
-        "github_manager.GithubManager.replace_changelog_file"
-    )
+    merge_develop_into_main_mock = mocker.patch(merge_develop_into_main_path)
+    create_new_tag_and_release_mock = mocker.patch(create_new_tag_and_release_path)
+    replace_changelog_file_mock = mocker.patch(replace_changelog_file_path)
+
 
     releases_manager = ReleasesManager()
     releases_manager.create_new_release(repo_name=fake_repo_name, minor=True)
@@ -145,24 +139,17 @@ def test_release_minor(mocker: MockerFixture) -> None:
 def test_release_patch(mocker: MockerFixture) -> None:
 
     get_github_repository_mock = mocker.patch(
-        "github_manager.GithubManager.get_github_repository", return_value=fake_repo
+        get_github_repository_path, return_value=fake_repo
     )
-    get_latest_tag_mock = mocker.patch(
-        "github_manager.GithubManager.get_latest_tag", return_value=fake_tag
-    )
+    get_latest_tag_mock = mocker.patch(get_latest_tag_path, return_value=fake_tag)
     get_changelog_content_mock = mocker.patch(
-        "github_manager.GithubManager.get_changelog_content",
+        get_changelog_content_path,
         return_value=fake_changelog,
     )
-    merge_develop_into_main_mock = mocker.patch(
-        "github_manager.GithubManager.merge_develop_into_main"
-    )
-    create_new_tag_and_release_mock = mocker.patch(
-        "github_manager.GithubManager.create_new_tag_and_release"
-    )
-    replace_changelog_file_mock = mocker.patch(
-        "github_manager.GithubManager.replace_changelog_file"
-    )
+    merge_develop_into_main_mock = mocker.patch(merge_develop_into_main_path)
+    create_new_tag_and_release_mock = mocker.patch(create_new_tag_and_release_path)
+    replace_changelog_file_mock = mocker.patch(replace_changelog_file_path)
+
 
     releases_manager = ReleasesManager()
     releases_manager.create_new_release(repo_name=fake_repo_name, patch=True)
