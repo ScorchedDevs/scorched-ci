@@ -77,7 +77,7 @@ limit-inference-results=100
 
 # List of plugins (as comma separated values of python module names) to load,
 # usually to register additional checkers.
-load-plugins=django
+#load-plugins=django
 
 # Pickle collected data for later comparisons.
 persistent=yes
@@ -154,7 +154,6 @@ disable=raw-checker-failed,
         useless-suppression,
         deprecated-pragma,
         use-symbolic-message-instead,
-        django-not-configured,
         missing-module-docstring,
         missing-class-docstring,
         missing-function-docstring,
