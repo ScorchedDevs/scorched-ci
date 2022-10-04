@@ -51,6 +51,7 @@ fake_changelog = """
 
     - N/A
 """
+fake_description = "## Novas funcionalidades\n  - adding tests\n"
 fake_repo = FakeRepo
 
 get_github_repository_path = "github_manager.GithubManager.get_github_repository"
@@ -95,7 +96,7 @@ def test_release_major(mocker: MockerFixture) -> None:
     )
     assert (
         releases_manager.create_release_description(fake_repo)
-        == "## Novas funcionalidades\n  - adding tests\n"
+        == fake_description
     )
 
 
@@ -132,7 +133,7 @@ def test_release_minor(mocker: MockerFixture) -> None:
     )
     assert (
         releases_manager.create_release_description(fake_repo)
-        == "## Novas funcionalidades\n  - adding tests\n"
+        == fake_description
     )
 
 
@@ -169,5 +170,5 @@ def test_release_patch(mocker: MockerFixture) -> None:
     )
     assert (
         releases_manager.create_release_description(fake_repo)
-        == "## Novas funcionalidades\n  - adding tests\n"
+        == fake_description
     )
