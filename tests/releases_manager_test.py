@@ -94,10 +94,7 @@ def test_release_major(mocker: MockerFixture) -> None:
         )
         == "v2-0-0"
     )
-    assert (
-        releases_manager.create_release_description(fake_repo)
-        == fake_description
-    )
+    assert releases_manager.create_release_description(fake_repo) == fake_description
 
 
 def test_release_minor(mocker: MockerFixture) -> None:
@@ -113,7 +110,6 @@ def test_release_minor(mocker: MockerFixture) -> None:
     merge_develop_into_main_mock = mocker.patch(merge_develop_into_main_path)
     create_new_tag_and_release_mock = mocker.patch(create_new_tag_and_release_path)
     replace_changelog_file_mock = mocker.patch(replace_changelog_file_path)
-
 
     releases_manager = ReleasesManager()
     releases_manager.create_new_release(repo_name=fake_repo_name, minor=True)
@@ -131,10 +127,7 @@ def test_release_minor(mocker: MockerFixture) -> None:
         )
         == "v1-1-0"
     )
-    assert (
-        releases_manager.create_release_description(fake_repo)
-        == fake_description
-    )
+    assert releases_manager.create_release_description(fake_repo) == fake_description
 
 
 def test_release_patch(mocker: MockerFixture) -> None:
@@ -150,7 +143,6 @@ def test_release_patch(mocker: MockerFixture) -> None:
     merge_develop_into_main_mock = mocker.patch(merge_develop_into_main_path)
     create_new_tag_and_release_mock = mocker.patch(create_new_tag_and_release_path)
     replace_changelog_file_mock = mocker.patch(replace_changelog_file_path)
-
 
     releases_manager = ReleasesManager()
     releases_manager.create_new_release(repo_name=fake_repo_name, patch=True)
@@ -168,7 +160,4 @@ def test_release_patch(mocker: MockerFixture) -> None:
         )
         == "v1-0-1"
     )
-    assert (
-        releases_manager.create_release_description(fake_repo)
-        == fake_description
-    )
+    assert releases_manager.create_release_description(fake_repo) == fake_description
