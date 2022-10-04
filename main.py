@@ -1,10 +1,10 @@
 from os import getenv
 from releases_manager import ReleasesManager
-from utils import Utils
+from config import config_logger
 
 release_manager = ReleasesManager()
-utils = Utils()
-utils.start_streaming_the_log()
+
+config_logger()
 
 repo_name = getenv("REPO_NAME")
 

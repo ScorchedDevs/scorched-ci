@@ -35,9 +35,12 @@ class ReleasesManager:
             major_number = major_number.replace("v", "")
             major_number = int(major_number) + 1
             major_number = "v" + str(major_number)
+            minor_number = "0"
+            patch_number = "0"
 
         if minor:
             minor_number = str(int(minor_number) + 1)
+            patch_number = "0"
 
         if patch:
             patch_number = str(int(patch_number) + 1)

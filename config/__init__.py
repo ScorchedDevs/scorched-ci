@@ -1,0 +1,1 @@
+from .logging_configuration import config_logger

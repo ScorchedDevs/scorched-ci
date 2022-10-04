@@ -6,13 +6,12 @@
 
 ## Melhorias
 
- - [#2](https://github.com/ScorchedDevs/scorched-ci/issues/2) Adicionando testes unitários.
+ - N/A
 
 ## Correções
 
- - N/A
+ - Corrigindo logs duplicados
 
 ## Quebra de compatibilidade
 
  - N/A
- 
