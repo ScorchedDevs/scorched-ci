@@ -3,7 +3,7 @@ from pytest_mock import MockerFixture
 from releases_manager import ReleasesManager
 
 
-class FakeRepo:
+class FakeRepo: # pragma: no cover
     def get_branch(branch_name):
         class branch:
             class commit:
@@ -13,7 +13,7 @@ class FakeRepo:
 
     def create_git_tag_and_release(
         tag, tag_message, release_name, release_message, type, object
-    ):
+    ): 
         pass
 
     def get_contents(changelog_file):
