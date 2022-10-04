@@ -10,7 +10,7 @@
 
 ## Correções
 
- - N/A
+ - Corrigindo logs duplicados
 
 ## Quebra de compatibilidade
 
