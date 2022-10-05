@@ -6,7 +6,7 @@
 
 ## Melhorias
 
- - N/A
+ - Mudando nome de pastas e arquivos
 
 ## Correções
 
