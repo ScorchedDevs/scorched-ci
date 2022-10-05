@@ -67,26 +67,7 @@ releases_creator = ReleasesCreator()
 
 def test_release_major(mocker: MockerFixture) -> None:
 
-    get_github_repository_mock = mocker.patch(
-        get_github_repository_path, return_value=fake_repo
-    )
-    get_latest_tag_mock = mocker.patch(get_latest_tag_path, return_value=fake_tag)
-    get_changelog_content_mock = mocker.patch(
-        get_changelog_content_path,
-        return_value=fake_changelog,
-    )
-    merge_develop_into_main_mock = mocker.patch(merge_develop_into_main_path)
-    create_new_tag_and_release_mock = mocker.patch(create_new_tag_and_release_path)
-    replace_changelog_file_mock = mocker.patch(replace_changelog_file_path)
-
-    releases_creator.create_new_release(repo_name=fake_repo_name, major=True)
-
-    get_github_repository_mock.assert_called_once_with(fake_repo_name)
-    get_latest_tag_mock.assert_called_once_with(fake_repo)
-    get_changelog_content_mock.assert_called_once_with(fake_repo)
-    merge_develop_into_main_mock.assert_called_once()
-    create_new_tag_and_release_mock.assert_called_once()
-    replace_changelog_file_mock.assert_called_once()
+    common_mocks_and_asserts(mocker)
 
     assert (
         releases_creator.calculate_new_tag(
@@ -99,26 +80,7 @@ def test_release_major(mocker: MockerFixture) -> None:
 
 def test_release_minor(mocker: MockerFixture) -> None:
 
-    get_github_repository_mock = mocker.patch(
-        get_github_repository_path, return_value=fake_repo
-    )
-    get_latest_tag_mock = mocker.patch(get_latest_tag_path, return_value=fake_tag)
-    get_changelog_content_mock = mocker.patch(
-        get_changelog_content_path,
-        return_value=fake_changelog,
-    )
-    merge_develop_into_main_mock = mocker.patch(merge_develop_into_main_path)
-    create_new_tag_and_release_mock = mocker.patch(create_new_tag_and_release_path)
-    replace_changelog_file_mock = mocker.patch(replace_changelog_file_path)
-
-    releases_creator.create_new_release(repo_name=fake_repo_name, major=True)
-
-    get_github_repository_mock.assert_called_once_with(fake_repo_name)
-    get_latest_tag_mock.assert_called_once_with(fake_repo)
-    get_changelog_content_mock.assert_called_once_with(fake_repo)
-    merge_develop_into_main_mock.assert_called_once()
-    create_new_tag_and_release_mock.assert_called_once()
-    replace_changelog_file_mock.assert_called_once()
+    common_mocks_and_asserts(mocker)
 
     assert (
         releases_creator.calculate_new_tag(
@@ -131,6 +93,17 @@ def test_release_minor(mocker: MockerFixture) -> None:
 
 def test_release_patch(mocker: MockerFixture) -> None:
 
+    common_mocks_and_asserts(mocker)
+
+    assert (
+        releases_creator.calculate_new_tag(
+            fake_tag, major=False, minor=False, patch=True
+        )
+        == "v1-0-1"
+    )
+    assert releases_creator.create_release_description(fake_repo) == fake_description
+
+def common_mocks_and_asserts(mocker):
     get_github_repository_mock = mocker.patch(
         get_github_repository_path, return_value=fake_repo
     )
@@ -151,11 +124,3 @@ def test_release_patch(mocker: MockerFixture) -> None:
     merge_develop_into_main_mock.assert_called_once()
     create_new_tag_and_release_mock.assert_called_once()
     replace_changelog_file_mock.assert_called_once()
-
-    assert (
-        releases_creator.calculate_new_tag(
-            fake_tag, major=False, minor=False, patch=True
-        )
-        == "v1-0-1"
-    )
-    assert releases_creator.create_release_description(fake_repo) == fake_description
