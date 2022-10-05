@@ -1,5 +1,5 @@
 from os import getenv
-from releases_manager import ReleasesManager
+from app import ReleasesManager
 from config import config_logger
 
 release_manager = ReleasesManager()

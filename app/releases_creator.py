@@ -1,9 +1,8 @@
 import logging
-from github_manager import GithubManager
+from api import GithubManager
 
 
-
-class ReleasesManager:
+class ReleasesCreator:
     def __init__(self):
         self.github_manager = GithubManager()
 
