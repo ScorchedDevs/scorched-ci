@@ -1,8 +1,8 @@
 from os import getenv
-from releases_manager import ReleasesManager
+from app import ReleasesCreator
 from config import config_logger
 
-release_manager = ReleasesManager()
+release_manager = ReleasesCreator()
 
 config_logger()
 

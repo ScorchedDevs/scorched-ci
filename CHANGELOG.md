@@ -6,11 +6,11 @@
 
 ## Melhorias
 
- - N/A
+ - Mudando nome de pastas e arquivos
 
 ## Correções
 
- - Corrigindo logs duplicados
+ - N/A
 
 ## Quebra de compatibilidade
 
