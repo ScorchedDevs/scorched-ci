@@ -1,17 +1,17 @@
 # Changelog
 
-## Novas funcionalidades
+## New Features
 
- - N/A
+ - Adding more detailed logging eventes
 
-## Melhorias
+## Enhancements
 
- - N/A
+ - #8(https://github.com/ScorchedDevs/scorched-ci/issues/8) Now repository owner can pick their default branch name
 
-## Correções
+## Fixes
 
- - Corrigindo o README.md
+ - Changing everything to be in english for better user understanding
 
-## Quebra de compatibilidade
+## Compatibility Breaker
 
  - N/A
