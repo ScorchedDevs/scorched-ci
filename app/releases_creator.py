@@ -16,8 +16,12 @@ class ReleasesCreator:
         new_tag = self.calculate_new_tag(repo, major, minor, patch)
         description = self.create_release_description(repo)
         logging.info("Creating a new release")
-        created_release = self.github_manager.create_new_tag_and_release(repo, new_tag, description)
-        logging.info("New tag created: %s\nRelease created: %s", new_tag, created_release.url)
+        created_release = self.github_manager.create_new_tag_and_release(
+            repo, new_tag, description
+        )
+        logging.info(
+            "New tag created: %s\nRelease created: %s", new_tag, created_release.url
+        )
         self.github_manager.replace_changelog_file(repo)
         logging.info("Changelog changed to template")
 

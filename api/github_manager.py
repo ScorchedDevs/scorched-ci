@@ -33,7 +33,9 @@ class GithubManager:
 
         head = repo.get_branch(default_branch)
 
-        merge_commit = repo.merge("main", head.commit.sha, f"Merging {default_branch} into main branch")
+        merge_commit = repo.merge(
+            "main", head.commit.sha, f"Merging {default_branch} into main branch"
+        )
 
         return merge_commit
 
