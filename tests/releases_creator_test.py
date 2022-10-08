@@ -56,7 +56,7 @@ fake_repo = FakeRepo
 
 get_github_repository_path = "api.GithubManager.get_github_repository"
 get_latest_tag_path = "api.GithubManager.get_latest_tag"
-merge_develop_into_main_path = "api.GithubManager.merge_develop_into_main"
+merge_develop_into_main_path = "api.GithubManager.merge_default_branch_into_main"
 create_new_tag_and_release_path = (
     "api.GithubManager.create_new_tag_and_release"
 )

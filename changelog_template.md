@@ -1,17 +1,17 @@
 # Changelog
 
-## Novas funcionalidades
+## New Features
 
  - N/A
 
-## Melhorias
+## Enhancements
 
  - N/A
 
-## Correções
+## Fixes
 
  - N/A
 
-## Quebra de compatibilidade
+## Compatibility Breaker
 
  - N/A
