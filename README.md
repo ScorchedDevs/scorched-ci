@@ -7,8 +7,8 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ScorchedDevs_scorched-ci&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ScorchedDevs_scorched-ci)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ScorchedDevs_scorched-ci&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=ScorchedDevs_scorched-ci)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ScorchedDevs_scorched-ci&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=ScorchedDevs_scorched-ci)
-# Scorched Movies Backend
-Esse é um projeto feito no framework Django para ser o backend da aplicação Scorched Movies, cujo o propósito é fazer downloads automaticos de conteúdo de mídia em torrent e disponibilizar, automaticamente, esse conteúdo via Plex.
+# Scorched-CI
+This project is going to automate your releases. When you add it as an github action to your projectit will automatically merge the develop branch into the main branch, then it will, calculate a new tag, create a new release and add the release description based on the CHANGELOG.md file.
 
 ## Recomendações
 
