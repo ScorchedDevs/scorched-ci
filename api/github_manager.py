@@ -27,16 +27,20 @@ class GithubManager:
 
         return changelog_content
 
-    def merge_develop_into_main(self, repo):
+    def merge_default_branch_into_main(self, repo):
 
-        head = repo.get_branch("develop")
+        default_branch = self.get_default_branch_name(repo)
 
-        repo.merge("main", head.commit.sha, "Mergeando develop na main")
+        head = repo.get_branch(default_branch)
+
+        merge_commit = repo.merge("main", head.commit.sha, f"Merging {default_branch} into main branch")
+
+        return merge_commit
 
     def create_new_tag_and_release(self, repo, new_tag, release_description):
 
         commit_sha = repo.get_branch("main").commit.sha
-        repo.create_git_tag_and_release(
+        created_release = repo.create_git_tag_and_release(
             tag=new_tag,
             tag_message="Tag criada automaticamente pelo Scorched CI",
             release_name=new_tag,
@@ -44,6 +48,8 @@ class GithubManager:
             type="commit",
             object=commit_sha,
         )
+
+        return created_release
 
     def replace_changelog_file(self, repo):
 
@@ -61,3 +67,7 @@ class GithubManager:
                 changelog_template.read(),
                 branch="develop",
             )
+
+    def get_default_branch_name(self, repo):
+
+        return repo.default_branch

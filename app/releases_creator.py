@@ -10,13 +10,16 @@ class ReleasesCreator:
 
         repo = self.github_manager.get_github_repository(repo_name)
         logging.info("Getting repository")
+        logging.info("Merging default branch into main")
+        merge_commit = self.github_manager.merge_default_branch_into_main(repo)
+        logging.info("Merge commit: %s", merge_commit.url)
         new_tag = self.calculate_new_tag(repo, major, minor, patch)
         description = self.create_release_description(repo)
-        logging.info("Merging develop into main")
-        self.github_manager.merge_develop_into_main(repo)
         logging.info("Creating a new release")
-        self.github_manager.create_new_tag_and_release(repo, new_tag, description)
+        created_release = self.github_manager.create_new_tag_and_release(repo, new_tag, description)
+        logging.info("New tag created: %s\nRelease created: %s", new_tag, created_release.url)
         self.github_manager.replace_changelog_file(repo)
+        logging.info("Changelog changed to template")
 
     def calculate_new_tag(self, repo, major, minor, patch):
         latest_tag = self.github_manager.get_latest_tag(repo)
