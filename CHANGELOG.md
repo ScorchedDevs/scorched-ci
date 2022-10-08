@@ -6,11 +6,11 @@
 
 ## Melhorias
 
- - Mudando nome de pastas e arquivos
+ - N/A
 
 ## Correções
 
- - N/A
+ - Corrigindo o README.md
 
 ## Quebra de compatibilidade
 
