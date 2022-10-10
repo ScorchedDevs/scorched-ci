@@ -10,7 +10,7 @@
 
 ## Correções
 
- - N/A
+ - Fixing the readme file
 
 ## Quebra de compatibilidade
 
