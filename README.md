@@ -91,6 +91,7 @@ jobs:
         TOKEN: ${{ secrets.TOKEN }}
 ```
 
+You should create a secret named token with an access token from github
 After that your projects will be released in the following pattern: vx-x-x (x being a incrementing number)
 
 ## Recomendações
