@@ -10,6 +10,89 @@
 # Scorched-CI
 This project is going to automate your releases. When you add it as an github action to your projectit will automatically merge the develop branch into the main branch, then it will, calculate a new tag, create a new release and add the release description based on the CHANGELOG.md file.
 
+# How to use
+First you need create another branch, aside from main (or master) and set it to be your default branch. Our recommendation is to protect the main branch and never push to it, so its always on pair with the lastest branch.
+
+After that you should set up the following files:
+
+### CHANGELOG.md
+
+```md
+# Changelog
+
+## New Features
+
+ - N/A
+
+## Enhancements
+
+ - N/A
+
+## Fixes
+
+ - N/A
+
+## Compatibility Breaker
+
+ - N/A
+```
+Avoid using the "-" character when writing a topic. This should be placed on the root directory of your project.
+
+### release.yml
+
+```yml
+name: Scorched-CI-Release
+description: 'Automates releases with Major, Minor and Patch options'
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        type: choice
+        description: Release Type
+        options: 
+        - major
+        - minor
+        - patch
+
+jobs:
+  release:
+    if: ${{ github.ref == 'refs/heads/develop' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+    - name: Clonning last Scorched CI version
+      run: |
+        git clone https://github.com/ScorchedDevs/scorched-ci.git
+        cd scorched-ci
+        git fetch --tags
+        latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+        git checkout $latestTag
+    - name: Installing dependencies
+      run: |
+        cd scorched-ci
+        pip install -r requirements.txt
+    - name: Creating the release
+      run: |
+        cd scorched-ci
+        python -c 'import main; main.release_${{ github.event.inputs.release }}()'
+      env:
+        REPO_NAME: ${{ github.repository }}
+        TOKEN: ${{ secrets.TOKEN }}
+```
+
+After that your projects will be released in the following pattern: vx-x-x (x being a incrementing number)
+
 ## Recomendações
 
 Para editar esse projeto é recomendado que se use o sistema operacional linux, principalmente por ser um projeto que contempla a tecnologia Docker.
