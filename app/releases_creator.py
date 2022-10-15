@@ -21,7 +21,11 @@ class ReleasesCreator:
         created_release = self.github_manager.create_new_tag_and_release(
             repo, new_tag, description
         )
-        logging.info("New release and tag created: %s %s", created_release.title, created_release.url)
+        logging.info(
+            "New release and tag created: %s %s",
+            created_release.title,
+            created_release.url,
+        )
         self.github_manager.replace_changelog_file(repo)
         logging.info("Changelog changed to template")
 
@@ -31,7 +35,7 @@ class ReleasesCreator:
         if not latest_tag:
             latest_tag = "v0.0.0"
 
-        if '-' in latest_tag:
+        if "-" in latest_tag:
             self.migrate_releases.migrate_releases(repo)
             latest_tag = self.github_manager.get_latest_tag(repo)
 

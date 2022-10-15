@@ -18,7 +18,9 @@ class MigrateReleases:
         for release in releases:
             if "-" in release.tag_name:
                 created_release = self.replace_tag_and_release(repo, release)
-                deleted_release = self.github_manager.delete_release_and_tag(repo, release)
+                deleted_release = self.github_manager.delete_release_and_tag(
+                    repo, release
+                )
 
                 logging.info(
                     "Release %s replaced by release %s %s",

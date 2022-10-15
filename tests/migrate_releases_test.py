@@ -1,9 +1,9 @@
-# pylint: disable=too-few-public-methods, invalid-name, no-self-argument, redefined-builtin, too-many-arguments
+# pylint: disable=too-few-public-methods, invalid-name, no-self-argument, redefined-builtin, too-many-arguments, no-method-argument
 from pytest_mock import MockerFixture
 from app.migrate_releases import MigrateReleases
 
 
-class Release:
+class Release: # pragma: no cover
     title = "v1-0-0"
     tag_name = "v1-0-0"
     body = """## Fixes\n - Test fixes"""
@@ -11,7 +11,7 @@ class Release:
     id = 12345
 
 
-class FakeRepo:
+class FakeRepo: # pragma: no cover
     full_name = "some/repo-name"
 
     # pragma: no cover
@@ -19,12 +19,12 @@ class FakeRepo:
         pass
 
 
-class CreatedRelease:
+class CreatedRelease: # pragma: no cover
     title = "v1.0.0"
     url = "some url"
 
 
-class DeletedRelease:
+class DeletedRelease: # pragma: no cover
     title = "v1-0-0"
 
 

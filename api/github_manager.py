@@ -40,7 +40,9 @@ class GithubManager:
 
         return merge_commit
 
-    def create_new_tag_and_release(self, repo, new_tag, release_description, commit_sha=None):
+    def create_new_tag_and_release(
+        self, repo, new_tag, release_description, commit_sha=None
+    ):
 
         if not commit_sha:
             commit_sha = repo.get_branch("main").commit.sha
@@ -83,7 +85,9 @@ class GithubManager:
 
     def delete_release_and_tag(self, repo, release):
 
-        url_release = f"https://api.github.com/repos/{repo.full_name}/releases/{release.id}"
+        url_release = (
+            f"https://api.github.com/repos/{repo.full_name}/releases/{release.id}"
+        )
         url_tag = f"https://api.github.com/repos/{repo.full_name}/git/refs/tags/{release.tag_name}"
 
         headers = {
@@ -91,7 +95,7 @@ class GithubManager:
             "Authorization": f"token {self.token}",
         }
 
-        requests.delete(url_release, headers=headers)
-        requests.delete(url_tag, headers=headers)
+        requests.delete(url_release, headers=headers, timeout=60)
+        requests.delete(url_tag, headers=headers, timeout=60)
 
         return release
