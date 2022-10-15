@@ -33,7 +33,8 @@ class MigrateReleases:
 
         new_tag = release.tag_name.replace("-", ".")
         release_description = release.body
-        commit_sha = release.raw_data["target_commitish"]
+        tag_ref = self.github_manager.get_tag_ref(repo, release.tag_name)
+        commit_sha = tag_ref.raw_data["object"]["sha"]
         created_release = self.github_manager.create_new_tag_and_release(
             repo, new_tag, release_description, commit_sha=commit_sha
         )
