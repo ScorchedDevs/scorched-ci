@@ -1,10 +1,12 @@
 import logging
 from api import GithubManager
+from .migrate_releases import MigrateReleases
 
 
 class ReleasesCreator:
     def __init__(self):
         self.github_manager = GithubManager()
+        self.migrate_releases = MigrateReleases()
 
     def create_new_release(self, repo_name=None, major=False, minor=False, patch=False):
 
@@ -19,9 +21,7 @@ class ReleasesCreator:
         created_release = self.github_manager.create_new_tag_and_release(
             repo, new_tag, description
         )
-        logging.info(
-            "New tag created: %s\nRelease created: %s", new_tag, created_release.url
-        )
+        logging.info("New release and tag created: %s %s", created_release.title, created_release.url)
         self.github_manager.replace_changelog_file(repo)
         logging.info("Changelog changed to template")
 
@@ -29,9 +29,13 @@ class ReleasesCreator:
         latest_tag = self.github_manager.get_latest_tag(repo)
 
         if not latest_tag:
-            latest_tag = "v0-0-0"
+            latest_tag = "v0.0.0"
 
-        split_tag = latest_tag.split("-")
+        if '-' in latest_tag:
+            self.migrate_releases.migrate_releases(repo)
+            latest_tag = self.github_manager.get_latest_tag(repo)
+
+        split_tag = latest_tag.split(".")
 
         major_number = split_tag[0]
         minor_number = split_tag[1]
@@ -53,7 +57,7 @@ class ReleasesCreator:
 
         new_tag_tuple = (major_number, minor_number, patch_number)
 
-        new_tag = "-".join(new_tag_tuple)
+        new_tag = ".".join(new_tag_tuple)
 
         return new_tag
 
@@ -79,6 +83,6 @@ class ReleasesCreator:
                     description += f"  -{change.rstrip()}\n"
 
         if description == "":
-            raise SystemExit("Changelog vazio")
+            raise SystemExit("Empty Changelog")
 
         return description
