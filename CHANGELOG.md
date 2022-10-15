@@ -10,7 +10,7 @@
 
 ## Fixes
 
- - N/A
+ - https://github.com/ScorchedDevs/scorched-ci/issues/11 Fixing migration to get correct commit when migrating
 
 ## Compatibility Breaker
 

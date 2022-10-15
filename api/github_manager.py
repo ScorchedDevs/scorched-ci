@@ -99,3 +99,7 @@ class GithubManager:
         requests.delete(url_tag, headers=headers, timeout=60)
 
         return release
+
+    def get_tag_ref(self, repo, tag_name):
+
+        return repo.get_git_ref(f"tags/{tag_name}")

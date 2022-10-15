@@ -3,7 +3,7 @@ from pytest_mock import MockerFixture
 from app.migrate_releases import MigrateReleases
 
 
-class Release: # pragma: no cover
+class Release:  # pragma: no cover
     title = "v1-0-0"
     tag_name = "v1-0-0"
     body = """## Fixes\n - Test fixes"""
@@ -11,7 +11,7 @@ class Release: # pragma: no cover
     id = 12345
 
 
-class FakeRepo: # pragma: no cover
+class FakeRepo:  # pragma: no cover
     full_name = "some/repo-name"
 
     # pragma: no cover
@@ -19,12 +19,16 @@ class FakeRepo: # pragma: no cover
         pass
 
 
-class CreatedRelease: # pragma: no cover
+class TagRef:
+    raw_data = {"object": {"sha": "somecommitsha"}}
+
+
+class CreatedRelease:  # pragma: no cover
     title = "v1.0.0"
     url = "some url"
 
 
-class DeletedRelease: # pragma: no cover
+class DeletedRelease:  # pragma: no cover
     title = "v1-0-0"
 
 
@@ -34,7 +38,9 @@ fake_repo = FakeRepo
 created_release = CreatedRelease
 deleted_release = DeletedRelease
 fake_release = Release
+fake_tag_ref = TagRef
 fake_tag = "v1.0.0"
+fake_tag_name = "v1-0-0"
 fake_commit_sha = "somecommitsha"
 
 migrate_releases = MigrateReleases()
@@ -44,6 +50,9 @@ def test_migrate_release(mocker: MockerFixture):
 
     get_repository_releases_mock = mocker.patch(
         "api.GithubManager.get_repository_releases", return_value=[Release]
+    )
+    get_tag_ref_mock = mocker.patch(
+        "api.GithubManager.get_tag_ref", return_value=fake_tag_ref
     )
     create_new_tag_and_release_mock = mocker.patch(
         "api.GithubManager.create_new_tag_and_release", return_value=created_release
@@ -59,6 +68,7 @@ def test_migrate_release(mocker: MockerFixture):
         fake_repo, fake_tag, fake_description, commit_sha=fake_commit_sha
     )
     delete_release_and_tag_mock.assert_called_once_with(fake_repo, fake_release)
+    get_tag_ref_mock.assert_called_once_with(fake_repo, fake_tag_name)
     assert (
         migrate_releases.replace_tag_and_release(fake_repo, fake_release)
         == created_release
