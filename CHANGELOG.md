@@ -2,7 +2,7 @@
 
 ## New Features
 
- - N/A
+ - https://github.com/ScorchedDevs/scorched-ci/issues/11 Criando migração de tags e releases
 
 ## Enhancements
 
