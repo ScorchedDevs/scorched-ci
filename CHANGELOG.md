@@ -1,17 +1,17 @@
 # Changelog
 
-## Novas funcionalidades
+## New Features
+
+ - https://github.com/ScorchedDevs/scorched-ci/issues/11 Criando migração de tags e releases
+
+## Enhancements
 
  - N/A
 
-## Melhorias
+## Fixes
 
  - N/A
 
-## Correções
-
- - Fixing the readme file
-
-## Quebra de compatibilidade
+## Compatibility Breaker
 
  - N/A

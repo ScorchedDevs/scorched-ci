@@ -31,7 +31,7 @@ class FakeRepo:  # pragma: no cover
 
 
 fake_repo_name = "SomeRepo"
-fake_tag = "v1-0-0"
+fake_tag = "v1.0.0"
 fake_changelog = """
     # Changelog
 
@@ -57,13 +57,12 @@ fake_repo = FakeRepo
 get_github_repository_path = "api.GithubManager.get_github_repository"
 get_latest_tag_path = "api.GithubManager.get_latest_tag"
 merge_develop_into_main_path = "api.GithubManager.merge_default_branch_into_main"
-create_new_tag_and_release_path = (
-    "api.GithubManager.create_new_tag_and_release"
-)
+create_new_tag_and_release_path = "api.GithubManager.create_new_tag_and_release"
 replace_changelog_file_path = "api.GithubManager.replace_changelog_file"
 get_changelog_content_path = "api.GithubManager.get_changelog_content"
 
 releases_creator = ReleasesCreator()
+
 
 def test_release_major(mocker: MockerFixture) -> None:
 
@@ -73,7 +72,7 @@ def test_release_major(mocker: MockerFixture) -> None:
         releases_creator.calculate_new_tag(
             fake_tag, major=True, minor=False, patch=False
         )
-        == "v2-0-0"
+        == "v2.0.0"
     )
     assert releases_creator.create_release_description(fake_repo) == fake_description
 
@@ -86,7 +85,7 @@ def test_release_minor(mocker: MockerFixture) -> None:
         releases_creator.calculate_new_tag(
             fake_tag, major=False, minor=True, patch=False
         )
-        == "v1-1-0"
+        == "v1.1.0"
     )
     assert releases_creator.create_release_description(fake_repo) == fake_description
 
@@ -99,9 +98,10 @@ def test_release_patch(mocker: MockerFixture) -> None:
         releases_creator.calculate_new_tag(
             fake_tag, major=False, minor=False, patch=True
         )
-        == "v1-0-1"
+        == "v1.0.1"
     )
     assert releases_creator.create_release_description(fake_repo) == fake_description
+
 
 def common_mocks_and_asserts(mocker):
     get_github_repository_mock = mocker.patch(
