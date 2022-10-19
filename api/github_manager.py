@@ -1,13 +1,13 @@
-from os import getenv
 from github import Github
+from config import ConfigEnv
 import requests
 
 
 class GithubManager:
-    def __init__(self):
+    def __init__(self, github_token):
 
-        self.token = getenv("TOKEN")
-        self.github = Github(self.token)
+        self.config_env = ConfigEnv()
+        self.github = Github(github_token)
 
     def get_github_repository(self, repo_name):
 
@@ -92,7 +92,7 @@ class GithubManager:
 
         headers = {
             "Accept": "application/vnd.github+json",
-            "Authorization": f"token {self.token}",
+            "Authorization": f"token {self.config_env.github_token}",
         }
 
         requests.delete(url_release, headers=headers, timeout=60)

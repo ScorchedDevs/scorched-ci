@@ -1,16 +1,19 @@
 import logging
 from api import GithubManager
 from .migrate_releases import MigrateReleases
+from config import ConfigEnv
 
 
 class ReleasesCreator:
     def __init__(self):
-        self.github_manager = GithubManager()
+        self.config_env = ConfigEnv()
+        self.github_manager = GithubManager(self.config_env.github_token)
         self.migrate_releases = MigrateReleases()
 
-    def create_new_release(self, repo_name=None, major=False, minor=False, patch=False):
+    def create_new_release(self, major=False, minor=False, patch=False):
 
-        repo = self.github_manager.get_github_repository(repo_name)
+        self.config_env.validate_release_envs()
+        repo = self.github_manager.get_github_repository(self.config_env.repo_name)
         logging.info("Getting repository")
         logging.info("Merging default branch into main")
         merge_commit = self.github_manager.merge_default_branch_into_main(repo)

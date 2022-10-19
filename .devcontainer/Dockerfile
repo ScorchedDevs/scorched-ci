@@ -11,7 +11,13 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
-    default-jdk libldap2-dev libsasl2-dev
+    default-jdk libldap2-dev libsasl2-dev \
+    && apt install apt-transport-https ca-certificates curl gnupg lsb-release -y \
+    && curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt update \
+    && apt -y install docker-ce docker-ce-cli containerd.io
 
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 COPY setup.py /tmp/pip-tmp/

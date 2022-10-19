@@ -1,20 +1,26 @@
-from os import getenv
-from app import ReleasesCreator
+from app import ReleasesCreator, DockerImageCreator
 from config import config_logger
-
-release_manager = ReleasesCreator()
 
 config_logger()
 
-repo_name = getenv("REPO_NAME")
 
 def release_major():
-    release_manager.create_new_release(repo_name=repo_name, major=True)
+    release_manager = ReleasesCreator()
+    release_manager.create_new_release(major=True)
 
 
 def release_minor():
-    release_manager.create_new_release(repo_name=repo_name, minor=True)
+    release_manager = ReleasesCreator()
+    release_manager.create_new_release(minor=True)
 
 
 def release_patch():
-    release_manager.create_new_release(repo_name=repo_name, patch=True)
+    release_manager = ReleasesCreator()
+    release_manager.create_new_release(patch=True)
+
+def create_and_push_docker_image():
+    docker_image_creator = DockerImageCreator()
+    docker_image_creator.create_and_push_image()
+
+
+create_and_push_docker_image()

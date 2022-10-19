@@ -1,1 +1,2 @@
 from .releases_creator import ReleasesCreator
+from .docker_image_creator import DockerImageCreator
